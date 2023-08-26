@@ -1,6 +1,6 @@
 class obstacle {
 
-    constructor(type:number) {
+    constructor() {
 
         const e = document.createElement('div');
         e.classList.add('game-object');
@@ -15,7 +15,7 @@ class obstacle {
         }
         e.classList.add(`obstacle${this.id}`);
 
-        switch (type) {
+        switch (this.randomType()) {
 
             case 1 : {
                 this.height = 70;
@@ -42,6 +42,12 @@ class obstacle {
                 break;
             }
         }
+    }
+
+    randomType = () : number => {
+        let number = currentGame.difficulties[currentGame.difficulty - 1][Math.floor(Math.random() * 10) % 5];
+        console.log(number);
+        return number;
     }
 
     startMovement = () => {
@@ -72,8 +78,9 @@ class game {
     playerUp : boolean = false;
     gameRunning : boolean = false;
     score : number = 0;
-    frequency : number = 2050;
+    frequency : number = 1500;
     availableObstacleId : [boolean, boolean, boolean] = [true, true, true];
+    difficulties = [[1,1,1,1,2],[1,1,2,2,2],[1,2,2,2,3],[1,2,2,3,3],[2,2,3,3,3]];
 
     startGame = () => {
         let begin = document.querySelector('.begin');
@@ -125,13 +132,17 @@ class game {
 
     addObstacle = () => {
         if (!this.gameOver) {
-            let x = new obstacle(this.difficulty);
+            let x = new obstacle();
             x.startMovement();
             this.obstacles.push(x);
             setTimeout(() => {
                 this.addObstacle();
-            }, this.frequency)
+            }, this.randomFrequency())
         }
+    }
+
+    randomFrequency = () : number => {
+        return this.frequency - (75 * this.difficulty + Math.floor((Math.random() * 1000)) % (500));
     }
 
     interval = () => {
@@ -145,7 +156,7 @@ class game {
                 } else if (obstacle.x === 100) {
                     this.score++;
                     document.querySelector('.score')!.innerHTML = String(this.score);
-                    if (this.score % 10 === 0 && this.difficulty < 3) this.difficulty++;
+                    if (this.score % 10 === 0 && this.difficulty < 5) this.difficulty++;
                 }
             });
         }, 10);
