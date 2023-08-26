@@ -55,9 +55,11 @@ class obstacle {
         document.querySelector(`.obstacle${this.id}`)!.classList.add(`obstacle-move${this.id}`);
         this.x = 1800;
         setTimeout( () => {
-            document.querySelector(`.obstacle${this.id}`)!.remove();
-            currentGame.availableObstacleId[this.id] = true;
-            currentGame.obstacles.shift();
+            if (currentGame.gameRunning) {
+                document.querySelector(`.obstacle${this.id}`)!.remove();
+                currentGame.availableObstacleId[this.id] = true;
+                currentGame.obstacles.shift();
+            }
         }, 2000);
         if (!currentGame.gameRunning) currentGame.interval();
     }
@@ -224,15 +226,20 @@ class game {
     }
 
     restartGame = () => {
-        this.playerUp = false;
-        this.gameOver = false;
-        this.score = 0;
         document.querySelector('.end-screen')!.remove();
-        document.querySelector('.body')!.classList.remove('bck-change')
+        document.querySelector('.body')!.classList.remove('bck-change');
+        this.difficulty = 1;
+        this.availableObstacleId = [true, true, true];
+        this.obstacles = [];
+        this.jumpHeight = 500;
+        this.gameOver = false;
+        this.playerUp = false;
+        this.gameRunning = false;
+        this.score = 0;
         this.startGame();
     }
 }
 
-const currentGame = new game();
+let currentGame = new game();
 
 document.querySelector('.begin-btn')!.addEventListener('click', currentGame.startGame);
