@@ -106,7 +106,7 @@ button {
     background-color: #ffd500;
     color:#ffd500;
 }
-.obstacle {
+.obstacle0 {
     width: 0;
     height: 0;
     position: absolute;
@@ -114,27 +114,55 @@ button {
     left: 1800px;
 }
 .obstacle1 {
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: 2;
+    left: 1800px;
+}
+.obstacle2 {
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: 2;
+    left: 1800px;
+}
+.obstacle-type1 {
     border-left: 35px solid transparent;
     border-right: 35px solid transparent;
     border-bottom: 70px solid #ffc129;
     top: 430px
 }
-.obstacle2 {
+.obstacle-type2 {
     border-left: 50px solid transparent;
     border-right: 50px solid transparent;
     border-bottom: 80px solid #ff6716;
     top: 420px
 }
-.obstacle3 {
+.obstacle-type3 {
     border-left: 70px solid transparent;
     border-right: 70px solid transparent;
     border-bottom: 90px solid #ff3737;
     top: 410px
 }
-.obstacle-move {
-    animation: 1.9s linear obstacle-move;
+.obstacle-move0 {
+    animation: 1.9s linear obstacle-move0;
 }
-@keyframes obstacle-move {
+.obstacle-move1 {
+    animation: 1.9s linear obstacle-move1;
+}
+.obstacle-move2 {
+    animation: 1.9s linear obstacle-move2;
+}
+@keyframes obstacle-move0 {
+    0% { left: 1800px; }
+    100% { left: -100px; }
+}
+@keyframes obstacle-move1 {
+    0% { left: 1800px; }
+    100% { left: -100px; }
+}
+@keyframes obstacle-move2 {
     0% { left: 1800px; }
     100% { left: -100px; }
 }
