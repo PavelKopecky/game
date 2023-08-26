@@ -58,19 +58,20 @@ button {
 }
 .player {
     position: absolute;
-    width: 70px;
-    padding-bottom: 70px;
-    background-color: #a2f4ff;
-    color: #a2f4ff;
+    background: none;
     top: 1000px;
     left: 0;
+    padding: 0;
+    margin: 0;
     z-index: 1;
-    border-radius: 5px;
+    transition: rotate 0.5s;
+}
+.player.img {
+    width: 100%;
 }
 .player-move {
     animation: player-move 1s linear;
-    background-color: #ffd500;
-    color:#ffd500;
+    background: none;
 }
 @keyframes player-move {
     0%{top: 1000px; left: 0}
@@ -88,23 +89,31 @@ button {
     animation: player-jump 0.5s linear;
 }
 @keyframes player-jump {
-    0%{top: 430px;}
-    10%{top: 395px;}
-    20%{top: 370px;}
-    30%{top: 355px;}
-    40%{top: 345px;}
-    50%{top: 340px;}
-    60%{top: 345px;}
-    70%{top: 355px;}
-    80%{top: 370px;}
-    90%{top: 395px;}
-    100%{top: 430px;}
+    0%{top: 428px;}
+    5%{top: 401px;}
+    10%{top: 377px;}
+    15%{top: 355px;}
+    20%{top: 337px;}
+    25%{top: 321px;}
+    30%{top: 308px;}
+    35%{top: 298px;}
+    40%{top: 291px;}
+    45%{top: 287px;}
+    50%{top: 285px;}
+    55%{top: 287px;}
+    60%{top: 291px;}
+    65%{top: 298px;}
+    70%{top: 308px;}
+    75%{top: 321px;}
+    80%{top: 337px;}
+    85%{top: 355px;}
+    90%{top: 377px;}
+    95%{top: 401px;}
+    100%{top: 428px;}
 }
 .player-moved {
-    top: 430px;
+    top: 428px;
     left: 180px;
-    background-color: #ffd500;
-    color:#ffd500;
 }
 .obstacle0 {
     width: 0;
@@ -128,22 +137,22 @@ button {
     left: 1800px;
 }
 .obstacle-type1 {
-    border-left: 35px solid transparent;
-    border-right: 35px solid transparent;
-    border-bottom: 70px solid #ffc129;
-    top: 430px
+    top: 428px;
+}
+.obstacle-type1.img {
+    width: 100%;
 }
 .obstacle-type2 {
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom: 80px solid #ff6716;
-    top: 420px
+    top: 392px
+}
+.obstacle-type2.img {
+    width: 100%;
 }
 .obstacle-type3 {
-    border-left: 70px solid transparent;
-    border-right: 70px solid transparent;
-    border-bottom: 90px solid #ff3737;
-    top: 410px
+    top: 356px
+}
+.obstacle-type3.img {
+    width: 100%;
 }
 .obstacle-move0 {
     animation: 1.9s linear obstacle-move0;

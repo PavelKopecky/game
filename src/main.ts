@@ -3,8 +3,8 @@ class obstacle {
     constructor() {
 
         const e = document.createElement('div');
+        const img = document.createElement('img');
         e.classList.add('game-object');
-        document.body.appendChild(e);
 
         for (let i = 0; i < 3; ++i) {
             if (currentGame.availableObstacleId[i]) {
@@ -21,27 +21,34 @@ class obstacle {
                 this.height = 70;
                 this.width = 70;
                 e.classList.add('obstacle-type1');
+                img.src = '/src/img/obstacle1.png';
                 break;
             }
             case 2 : {
                 this.height = 80;
                 this.width = 100;
                 e.classList.add('obstacle-type2');
+                img.src = '/src/img/obstacle2.png';
                 break;
             }
             case 3 : {
                 this.height = 90;
                 this.width = 140;
                 e.classList.add('obstacle-type3');
+                img.src = '/src/img/obstacle3.png';
                 break;
             }
             default : {
                 this.height = 70;
                 this.width = 70;
                 e.classList.add('obstacle-type1');
+                img.src = '/src/img/obstacle1.png';
                 break;
             }
         }
+
+        e.appendChild(img);
+        document.body.appendChild(e);
     }
 
     randomType = () : number => {
@@ -82,6 +89,7 @@ class game {
     availableObstacleId : [boolean, boolean, boolean] = [true, true, true];
     difficulties = [[1,1,1,1,2],[1,1,2,2,2],[1,2,2,2,3],[1,2,2,3,3],[2,2,3,3,3]];
     highScore : number = 0;
+    jmpCount : number = 0;
 
     startGame = () => {
         let begin = document.querySelector('.begin');
@@ -122,7 +130,10 @@ class game {
 
     addPlayer = () => {
         const e = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = '/src/img/player1.png'
         e.classList.add('player','game-object');
+        e.appendChild(img);
         document.body.appendChild(e);
         setTimeout(() => {
             document.querySelector('.player')!.classList.add('player-move');
@@ -169,7 +180,8 @@ class game {
 
     playerJump = () => {
         if (!this.gameRunning) return;
-        const player = document.querySelector('.player');
+        const player = document.querySelector('.player') as HTMLElement;
+        player.style.rotate = `${(++this.jmpCount * 90)}deg`;
         if (player!.classList.contains('player-jump')) return;
         else {
             player!.classList.add('player-jump');
