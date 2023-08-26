@@ -45,9 +45,7 @@ class obstacle {
     }
 
     randomType = () : number => {
-        let number = currentGame.difficulties[currentGame.difficulty - 1][Math.floor(Math.random() * 10) % 5];
-        console.log(number);
-        return number;
+        return currentGame.difficulties[currentGame.difficulty - 1][Math.floor(Math.random() * 10) % 5];
     }
 
     startMovement = () => {
@@ -83,10 +81,15 @@ class game {
     frequency : number = 1500;
     availableObstacleId : [boolean, boolean, boolean] = [true, true, true];
     difficulties = [[1,1,1,1,2],[1,1,2,2,2],[1,2,2,2,3],[1,2,2,3,3],[2,2,3,3,3]];
+    highScore : number = 0;
 
     startGame = () => {
         let begin = document.querySelector('.begin');
         let beginBtn = document.querySelector('.begin-btn');
+
+        const hs = Number(localStorage.getItem('highscore')!);
+        if (hs) this.highScore = hs;
+
         if (beginBtn) beginBtn.remove();
         if (begin) {
             setTimeout(() => {
@@ -187,6 +190,11 @@ class game {
         this.gameRunning = false;
         this.difficulty = 1;
 
+        if (this.score > this.highScore) {
+            this.highScore = this.score;
+            localStorage.setItem('highscore', String(this.highScore));
+        }
+
         for (let i = 0; i < 3; ++i) {
             if (!this.availableObstacleId[i]) {
                 document.querySelector(`.obstacle${i}`)!.classList.add('paused');
@@ -207,16 +215,33 @@ class game {
             //final score
             let s = document.createElement('p');
             s.classList.add('fin-score');
-            s.innerHTML = `Final score: ${this.score}`;
+            s.innerHTML = `Final score: ${this.score}<br>High score: ${this.highScore}`;
             e.appendChild(s);
+
+            let r = document.createElement('div');
+            r.classList.add('end-buttons');
+
             //repeat button
-            let r = document.createElement('button');
-            r.classList.add('repeat-btn');
-            r.innerHTML = 'RETRY!';
+            let r1 = document.createElement('button');
+            r1.classList.add('repeat-btn','end-btn');
+            r1.innerHTML = 'RETRY!';
+            //reset button
+            let r2 = document.createElement('button');
+            r2.classList.add('reset-btn','end-btn');
+            r2.innerHTML = 'RESET';
+
+            r.appendChild(r1);
+            r.appendChild(r2);
+
             e.appendChild(r);
 
             document.body.appendChild(e);
             document.querySelector('.repeat-btn')!.addEventListener('click', this.restartGame);
+            document.querySelector('.reset-btn')!.addEventListener('click', () => {
+                this.highScore = 0;
+                localStorage.removeItem('highscore');
+                document.querySelector('.fin-score')!.innerHTML = `Final score: ${this.score}<br>High score: RESET`;
+            });
 
             let elements = document.querySelectorAll('.game-object');
             for (let i = 0; i < elements.length; ++i) {

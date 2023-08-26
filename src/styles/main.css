@@ -180,12 +180,16 @@ button {
 .paused {
     animation-play-state: paused;
 }
-.repeat-btn {
+.end-buttons {
+    white-space: nowrap;
+}
+.end-btn {
     color: #2a1813;
     background-color: #ff1c1c;
     font-size: 30px;
     border-radius: 5px;
     padding: 5px 30px;
+    margin: 10px;
     top: 480px;
     width: 200px;
     height: 50px;
