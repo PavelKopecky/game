@@ -209,11 +209,13 @@ class game {
                     clearInterval(gameInt);
                     this.gameLost();
                 } else if (obstacle.x === 100) {
-                    this.score++;
+                    if (++this.score === 69) {
+                        noice.play();
+                    }
                     document.querySelector('.score')!.innerHTML = String(this.score);
                     if (this.score % 10 === 0) {
                         if (this.difficulty < 10) this.difficulty++;
-                        score10.play();
+                        if (this.score !== 70) score10.play();
                     }
                 }
             });
@@ -350,5 +352,7 @@ let endTheme = new Audio('/src/effects/marche-funebre.mp3');
 endTheme.volume = 0.25;
 let jumpEffect = new Audio('/src/effects/jump1.mp3');
 jumpEffect.volume = 0.1;
+let noice = new Audio('/src/effects/-click-nice_3-1.mp3');
+noice.volume = 0.6;
 
 document.querySelector('.begin-btn')!.addEventListener('click', currentGame.startGame);
