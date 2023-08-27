@@ -101,15 +101,17 @@ class game {
     startGame = () => {
         let begin = document.querySelector('.begin');
         let beginBtn = document.querySelector('.begin-btn');
+        document.querySelector('.player-start')!.classList.add('fly-dude');
+        clearInterval(startJump);
 
         const hs = Number(localStorage.getItem('highscore')!);
         if (hs) this.highScore = hs;
 
-        if (beginBtn) beginBtn.remove();
         if (begin) {
             setTimeout(() => {
                 begin!.remove();
                 this.createGround();
+                if (beginBtn) beginBtn.remove();
                 setTimeout(this.addPlayer, 1000);
             }, 1000);
         } else {
@@ -205,7 +207,7 @@ class game {
         const gameInt = setInterval(() => {
             this.obstacles.forEach((obstacle) => {
                 obstacle.x -= 10;
-                if (obstacle.x <= 180 + obstacle.width/2 + 18 && obstacle.x >= 180 - obstacle.width/2 - 18 && !this.playerUp) {
+                if (obstacle.x <= 180 + obstacle.width/2 && obstacle.x >= 180 - obstacle.width/2 && !this.playerUp) {
                     clearInterval(gameInt);
                     this.gameLost();
                 } else if (obstacle.x === 100) {
@@ -355,4 +357,22 @@ jumpEffect.volume = 0.1;
 let noice = new Audio('/src/effects/-click-nice_3-1.mp3');
 noice.volume = 0.6;
 
-document.querySelector('.begin-btn')!.addEventListener('click', currentGame.startGame);
+let startTrigger = false;
+document.querySelector('.begin-btn')!.addEventListener('click', () => {
+    startTrigger = true;
+});
+let rotateCount = 0;
+
+const startJump = setInterval(() => {
+    const startImg = document.querySelector('.player-start')! as HTMLElement;
+    document.querySelector('.player-start')!.classList.add('player-start-jump');
+    startImg.style.rotate = `${90*rotateCount}deg`;
+    jumpEffect.play();
+    rotateCount += Math.floor(Math.random() * 10) % 5 - 2
+    setTimeout(() => {
+        jumpEffect.currentTime = 0;
+        jumpEffect.pause();
+        document.querySelector('.player-start')!.classList.remove('player-start-jump');
+        if (startTrigger) currentGame.startGame();
+    }, 1000);
+}, 1050);

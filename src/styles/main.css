@@ -18,33 +18,70 @@ body {
     background-color: #f5f5f5;
     text-align: center;
 }
-button {
-    cursor: pointer;
-}
 .begin {
-    margin-top: 200px;
-    text-align: center;
-    font-weight: bold;
-    transition: 1s;
+    position:absolute;
+}
+.begin-btn {
+    position:absolute;
+}
+.background-start {
+    position:absolute;
+    top: -650px;
+    left: -200px;
 }
 .begin-btn {
     border: none;
-    background-color: #ffd500;
-    color: blue;
-    font-size: 40px;
-    border-radius: 5px;
-    padding: 15px 55px 15px 55px;
-    font-weight: bolder;
-    transition: padding 0.3s;
 }
-.begin-btn:hover {
-    padding: 12px 51px 12px 51px;
+.player-start {
+    position: absolute;
+    z-index: 2;
+    top: 625px;
+    left: 200px;
+    transition: rotate 1s;
 }
-
-.begin-end  .begin-btn{
-    transition: 1s ease-in 0.2s;
-    color: #F5F5F5FF;
-    background: #F5F5F5FF;
+.player-start.img {
+    z-index: 2;
+    width: 100%;
+}
+.player-start-jump {
+    animation: player-start-jump 1s linear infinite;
+}
+@keyframes player-start-jump {
+    0%{top: 628px;}
+    5%{top: 601px;}
+    10%{top: 577px;}
+    15%{top: 555px;}
+    20%{top: 537px;}
+    25%{top: 521px;}
+    30%{top: 508px;}
+    35%{top: 498px;}
+    40%{top: 491px;}
+    45%{top: 487px;}
+    50%{top: 485px;}
+    55%{top: 487px;}
+    60%{top: 491px;}
+    65%{top: 498px;}
+    70%{top: 508px;}
+    75%{top: 521px;}
+    80%{top: 537px;}
+    85%{top: 555px;}
+    90%{top: 577px;}
+    95%{top: 601px;}
+    100%{top: 628px;}
+}
+.fly-dude {
+    animation: fly-dude 1s linear;
+}
+@keyframes fly-dude {
+    0%{top: 628px; left: 205px;}
+    10%{top: 478px; left: 210px;}
+    20%{top: 350px; left: 215px;}
+    30%{top: 242px; left: 220px;}
+    40%{top: 150px; left: 225px;}
+    50%{top: 71px; left: 230px;}
+    60%{top: 5px; left: 235px;}
+    70%{top: -50px; left: 240px; }
+    100%{top: -175px; left: 245px;}
 }
 .ground {
     margin: 267px 0 0;
