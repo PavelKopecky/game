@@ -6,14 +6,9 @@ class obstacle {
         const img = document.createElement('img');
         e.classList.add('game-object');
 
-        for (let i = 0; i < 5; ++i) {
-            if (currentGame.availableObstacleId[i]) {
-                currentGame.availableObstacleId[i] = false;
-                this.id = i;
-                break;
-            }
-        }
+        this.id = currentGame.obstacleIdCounter++;
         e.classList.add(`obstacle${this.id}`);
+        e.classList.add('obstacle');
 
         switch (this.randomType()) {
 
@@ -64,7 +59,6 @@ class obstacle {
         setTimeout( () => {
             if (currentGame.gameRunning) {
                 document.querySelector(`.obstacle${this.id}`)!.remove();
-                currentGame.availableObstacleId[this.id] = true;
                 currentGame.obstacles.shift();
             }
         }, 2000);
@@ -93,11 +87,11 @@ class game {
     gameRunning : boolean = false;
     score : number = 0;
     frequency : number = 1500;
-    availableObstacleId : [boolean, boolean, boolean, boolean, boolean] = [true, true, true, true, true];
     difficulties = [[1,1,1,1,2],[1,1,2,2,2],[1,2,2,2,3],[1,2,2,3,3],[2,2,3,3,3],[2,3,3,3,3]];
     highScore : number = 0;
     jmpCount : number = 0;
     groundInterval : number = 0;
+    obstacleIdCounter : number = 0;
 
     startGame = () => {
         let begin = document.querySelector('.begin');
@@ -264,6 +258,10 @@ class game {
         document.querySelectorAll('.game-object').forEach((element) => {
             element.classList.add('paused');
         });
+        this.obstacles.forEach((obstacle) => {
+            let x = document.querySelector(`.obstacle${obstacle.id}`)! as HTMLElement;
+            x.style.animationPlayState = 'paused';
+        })
         clearInterval(this.groundInterval);
 
         setTimeout(() => {
@@ -320,7 +318,6 @@ class game {
         endTheme.pause();
         endTheme.currentTime = 0;
         this.difficulty = 1;
-        this.availableObstacleId = [true, true, true, true, true];
         this.obstacles = [];
         this.jumpHeight = 500;
         this.gameOver = false;

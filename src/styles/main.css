@@ -179,35 +179,7 @@ body {
     top: 498px;
     left: 180px;
 }
-.obstacle0 {
-    width: 0;
-    height: 0;
-    position: absolute;
-    z-index: 2;
-    left: 1800px;
-}
-.obstacle1 {
-    width: 0;
-    height: 0;
-    position: absolute;
-    z-index: 2;
-    left: 1800px;
-}
-.obstacle2 {
-    width: 0;
-    height: 0;
-    position: absolute;
-    z-index: 2;
-    left: 1800px;
-}
-.obstacle3 {
-    width: 0;
-    height: 0;
-    position: absolute;
-    z-index: 2;
-    left: 1800px;
-}
-.obstacle4 {
+.obstacle {
     width: 0;
     height: 0;
     position: absolute;
@@ -232,19 +204,7 @@ body {
 .obstacle-type3.img {
     width: 100%;
 }
-.obstacle-move0 {
-    animation: 1.9s linear obstacle-move;
-}
-.obstacle-move1 {
-    animation: 1.9s linear obstacle-move;
-}
-.obstacle-move2 {
-    animation: 1.9s linear obstacle-move;
-}
-.obstacle-move3 {
-    animation: 1.9s linear obstacle-move;
-}
-.obstacle-move4 {
+.obstacle-move {
     animation: 1.9s linear obstacle-move;
 }
 @keyframes obstacle-move {
