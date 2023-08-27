@@ -69,6 +69,8 @@ class obstacle {
         }, 2000);
         if (!currentGame.gameRunning) {
             document.querySelector('.ground')!.classList.add('ground-move');
+            document.querySelector('.sky')!.classList.add('sky-move');
+            currentGame.playSong();
             currentGame.interval();
         }
     }
@@ -123,6 +125,7 @@ class game {
         s.classList.add('score','game-object');
         s.innerHTML = '0';
         document.body.appendChild(s);
+        this.addSky();
         const e = document.createElement('div');
         e.classList.add('ground','game-object');
         const img1 = document.createElement('img');
@@ -135,10 +138,24 @@ class game {
         e.appendChild(img1);
         e.appendChild(img2);
         document.body.appendChild(e);
+
         setTimeout(() => {
-            document.querySelector('.body')!.classList.add('bck-change');
             document.querySelector('.score')!.classList.add('score-appear');
         }, 100);
+    }
+
+    addSky = () => {
+        const sky = document.createElement('div');
+        sky.classList.add('sky');
+        const skyimg1 = document.createElement('img');
+        skyimg1.style.left = '0';
+        skyimg1.src = '/src/img/sky1-1.jpg';
+        const skyimg2 = document.createElement('img');
+        skyimg2.style.left = '2560';
+        skyimg2.src = '/src/img/sky1-1.jpg';
+        sky.appendChild(skyimg1);
+        sky.appendChild(skyimg2);
+        document.querySelector('.body')!.appendChild(sky);
     }
 
     addPlayer = () => {
@@ -168,7 +185,12 @@ class game {
             setTimeout(() => {
                 this.addObstacle();
             }, this.randomFrequency())
+
         }
+    }
+
+    playSong = () => {
+        theme.play();
     }
 
     randomFrequency = () : number => {
@@ -186,7 +208,10 @@ class game {
                 } else if (obstacle.x === 100) {
                     this.score++;
                     document.querySelector('.score')!.innerHTML = String(this.score);
-                    if (this.score % 10 === 0 && this.difficulty < 10) this.difficulty++;
+                    if (this.score % 10 === 0) {
+                        if (this.difficulty < 10) this.difficulty++;
+                        score10.play();
+                    }
                 }
             });
         }, 10);
@@ -216,6 +241,9 @@ class game {
         this.gameOver = true;
         this.gameRunning = false;
         this.difficulty = 1;
+        theme.pause();
+        theme.currentTime = 0;
+        scream.play();
 
         if (this.score > this.highScore) {
             this.highScore = this.score;
@@ -272,6 +300,8 @@ class game {
                 document.querySelector('.fin-score')!.innerHTML = `Final score: ${this.score}<br>High score: RESET`;
             });
 
+            setTimeout(() => {endTheme.play()}, 250);
+
             let elements = document.querySelectorAll('.game-object');
             for (let i = 0; i < elements.length; ++i) {
                 elements[i].remove();
@@ -282,6 +312,8 @@ class game {
     restartGame = () => {
         document.querySelector('.end-screen')!.remove();
         document.querySelector('.body')!.classList.remove('bck-change');
+        endTheme.pause();
+        endTheme.currentTime = 0;
         this.difficulty = 1;
         this.availableObstacleId = [true, true, true, true, true];
         this.obstacles = [];
@@ -303,5 +335,13 @@ let obstacleType2 = new Image();
 obstacleType2.src = '/src/img/obstacle2-1.png';
 let obstacleType3 = new Image();
 obstacleType3.src = '/src/img/obstacle3-1.png';
+let theme = new Audio('/src/effects/theme.mp3');
+theme.volume = 0.1;
+let score10 = new Audio('/src/effects/score10.mp3');
+score10.volume = 0.25;
+let scream = new Audio('/src/effects/wilhelmscream.mp3');
+scream.volume = 0.25;
+let endTheme = new Audio('/src/effects/marche-funebre.mp3');
+endTheme.volume = 0.25;
 
 document.querySelector('.begin-btn')!.addEventListener('click', currentGame.startGame);

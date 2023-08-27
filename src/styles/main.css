@@ -7,6 +7,13 @@ body, ul, li, h1, h2, a {
     margin: 0;
     padding: 0;
 }
+.img {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
 body {
     background-color: #f5f5f5;
     text-align: center;
@@ -43,9 +50,11 @@ button {
     margin: 267px 0 0;
     padding: 0 0;
     white-space: nowrap;
+    z-index: 0;
 }
 .ground.img {
     width: 100%;
+    z-index: 0;
 }
 .ground-move {
     animation: ground-move 2.56s linear infinite;
@@ -54,10 +63,22 @@ button {
     0%{margin-left: 0;}
     100%{margin-left: -2560px;}
 }
-.bck-change {
-    background-color: #a2f4ff;
-    color:#a2f4ff;
-    transition: 1s ease-in 0.2s;
+.sky {
+    white-space: nowrap;
+    position: absolute;
+    left: 0;
+    padding: 0 0;
+    top: 0;
+    z-index: -1;
+}
+.sky.img {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+.sky-move {
+    animation: ground-move 15s linear infinite;
+    z-index: -1;
 }
 .player {
     position: absolute;
