@@ -146,7 +146,7 @@ class game {
 
     addSky = () => {
         const sky = document.createElement('div');
-        sky.classList.add('sky');
+        sky.classList.add('sky','game-object');
         const skyimg1 = document.createElement('img');
         skyimg1.style.left = '0';
         skyimg1.src = '/src/img/sky1-1.jpg';
@@ -225,6 +225,7 @@ class game {
             const playerImg = document.querySelector('.player-img') as HTMLElement;
             playerImg.style.rotate = `${(++this.jmpCount * 90)}deg`;
             player!.classList.add('player-jump');
+            jumpEffect.play();
             setTimeout( () => {
                 this.playerUp = true;
             }, 30);
@@ -233,6 +234,8 @@ class game {
             }, 470);
             setTimeout(() => {
                 if (this.gameRunning) document.querySelector('.player')!.classList.remove('player-jump');
+                jumpEffect.currentTime = 0;
+                jumpEffect.pause();
             }, this.jumpHeight);
         }
     }
@@ -311,7 +314,6 @@ class game {
 
     restartGame = () => {
         document.querySelector('.end-screen')!.remove();
-        document.querySelector('.body')!.classList.remove('bck-change');
         endTheme.pause();
         endTheme.currentTime = 0;
         this.difficulty = 1;
@@ -335,13 +337,15 @@ let obstacleType2 = new Image();
 obstacleType2.src = '/src/img/obstacle2-1.png';
 let obstacleType3 = new Image();
 obstacleType3.src = '/src/img/obstacle3-1.png';
-let theme = new Audio('/src/effects/theme.mp3');
-theme.volume = 0.1;
-let score10 = new Audio('/src/effects/score10.mp3');
-score10.volume = 0.25;
+let theme = new Audio('/src/effects/main-theme-2.mp3');
+theme.volume = 0.2;
+let score10 = new Audio('/src/effects/score10-1.mp3');
+score10.volume = 0.1;
 let scream = new Audio('/src/effects/wilhelmscream.mp3');
 scream.volume = 0.25;
 let endTheme = new Audio('/src/effects/marche-funebre.mp3');
 endTheme.volume = 0.25;
+let jumpEffect = new Audio('/src/effects/jump1.mp3');
+jumpEffect.volume = 0.1;
 
 document.querySelector('.begin-btn')!.addEventListener('click', currentGame.startGame);
