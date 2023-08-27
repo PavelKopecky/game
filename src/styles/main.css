@@ -1,6 +1,7 @@
 html, body {
     margin: 0; height: 100%; overflow: hidden;
     font-family: "Comic Sans MS", serif;
+    user-select: none;
 }
 body, ul, li, h1, h2, a {
     margin: 0;
@@ -39,17 +40,19 @@ button {
     background: #F5F5F5FF;
 }
 .ground {
-    color: #F5F5F5FF;
-    background: #F5F5F5FF;
-    margin: 197px 0 0;
-    padding: 0 0 10000px;
-    transition: 1s ease-in 0.2s;
-
+    margin: 267px 0 0;
+    padding: 0 0;
+    white-space: nowrap;
+}
+.ground.img {
+    width: 100%;
 }
 .ground-move {
-    background-color: #ffeba2;
-    color:#ffeba2;
-    transition: 1s ease-in 0.2s;
+    animation: ground-move 2.56s linear infinite;
+}
+@keyframes ground-move {
+    0%{margin-left: 0;}
+    100%{margin-left: -2560px;}
 }
 .bck-change {
     background-color: #a2f4ff;
@@ -64,55 +67,58 @@ button {
     padding: 0;
     margin: 0;
     z-index: 1;
-    transition: rotate 0.5s;
 }
 .player.img {
     width: 100%;
+    transition: rotate 0.5s;
+}
+.player-img {
+    transition: rotate 0.5s;
 }
 .player-move {
     animation: player-move 1s linear;
     background: none;
 }
 @keyframes player-move {
-    0%{top: 1000px; left: 0}
-    20%{top: 700px; left: 36px}
-    30%{top: 600px; left: 54px}
-    40%{top: 520px; left: 72px}
-    50%{top: 470px; left: 90px}
-    60%{top: 440px; left: 108px}
-    70%{top: 420px; left: 126px}
-    80%{top: 415px; left: 144px}
-    90%{top: 420px; left: 162px}
-    100%{top: 430px; left: 180px}
+    0%{top: 1070px; left: 0}
+    20%{top: 770px; left: 36px}
+    30%{top: 670px; left: 54px}
+    40%{top: 590px; left: 72px}
+    50%{top: 540px; left: 90px}
+    60%{top: 510px; left: 108px}
+    70%{top: 490px; left: 126px}
+    80%{top: 485px; left: 144px}
+    90%{top: 490px; left: 162px}
+    100%{top: 498px; left: 180px}
 }
 .player-jump {
     animation: player-jump 0.5s linear;
 }
 @keyframes player-jump {
-    0%{top: 428px;}
-    5%{top: 401px;}
-    10%{top: 377px;}
-    15%{top: 355px;}
-    20%{top: 337px;}
-    25%{top: 321px;}
-    30%{top: 308px;}
-    35%{top: 298px;}
-    40%{top: 291px;}
-    45%{top: 287px;}
-    50%{top: 285px;}
-    55%{top: 287px;}
-    60%{top: 291px;}
-    65%{top: 298px;}
-    70%{top: 308px;}
-    75%{top: 321px;}
-    80%{top: 337px;}
-    85%{top: 355px;}
-    90%{top: 377px;}
-    95%{top: 401px;}
-    100%{top: 428px;}
+    0%{top: 498px;}
+    5%{top: 471px;}
+    10%{top: 447px;}
+    15%{top: 425px;}
+    20%{top: 407px;}
+    25%{top: 391px;}
+    30%{top: 378px;}
+    35%{top: 368px;}
+    40%{top: 361px;}
+    45%{top: 357px;}
+    50%{top: 355px;}
+    55%{top: 357px;}
+    60%{top: 361px;}
+    65%{top: 368px;}
+    70%{top: 378px;}
+    75%{top: 391px;}
+    80%{top: 407px;}
+    85%{top: 425px;}
+    90%{top: 447px;}
+    95%{top: 471px;}
+    100%{top: 498px;}
 }
 .player-moved {
-    top: 428px;
+    top: 498px;
     left: 180px;
 }
 .obstacle0 {
@@ -136,20 +142,34 @@ button {
     z-index: 2;
     left: 1800px;
 }
+.obstacle3 {
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: 2;
+    left: 1800px;
+}
+.obstacle4 {
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: 2;
+    left: 1800px;
+}
 .obstacle-type1 {
-    top: 428px;
+    top: 498px;
 }
 .obstacle-type1.img {
     width: 100%;
 }
 .obstacle-type2 {
-    top: 392px
+    top: 474px
 }
 .obstacle-type2.img {
     width: 100%;
 }
 .obstacle-type3 {
-    top: 356px
+    top: 442px
 }
 .obstacle-type3.img {
     width: 100%;
@@ -163,6 +183,12 @@ button {
 .obstacle-move2 {
     animation: 1.9s linear obstacle-move2;
 }
+.obstacle-move3 {
+    animation: 1.9s linear obstacle-move3;
+}
+.obstacle-move4 {
+    animation: 1.9s linear obstacle-move4;
+}
 @keyframes obstacle-move0 {
     0% { left: 1800px; }
     100% { left: -100px; }
@@ -172,6 +198,14 @@ button {
     100% { left: -100px; }
 }
 @keyframes obstacle-move2 {
+    0% { left: 1800px; }
+    100% { left: -100px; }
+}
+@keyframes obstacle-move3 {
+    0% { left: 1800px; }
+    100% { left: -100px; }
+}
+@keyframes obstacle-move4 {
     0% { left: 1800px; }
     100% { left: -100px; }
 }
