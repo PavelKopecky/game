@@ -172,6 +172,9 @@ class game {
                 document.querySelector('.player')!.classList.add('player-moved');
                 document.querySelector('.player')!.classList.remove('player-move');
                 document.addEventListener('click', this.playerJump);
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === ' ')  this.playerJump();
+                });
                 this.addObstacle();
             }, 1000);
         }, 50);
