@@ -58,7 +58,8 @@ class obstacle {
 
     startMovement = () => {
         if (currentGame.gameOver) return;
-        document.querySelector(`.obstacle${this.id}`)!.classList.add(`obstacle-move${this.id}`);
+        let obstacle = document.querySelector(`.obstacle${this.id}`)! as HTMLElement;
+        obstacle.style.animation = '1.9s linear obstacle-move';
         this.x = 1800;
         setTimeout( () => {
             if (currentGame.gameRunning) {
@@ -260,14 +261,9 @@ class game {
             localStorage.setItem('highscore', String(this.highScore));
         }
 
-        for (let i = 0; i < 5; ++i) {
-            if (!this.availableObstacleId[i]) {
-                document.querySelector(`.obstacle${i}`)!.classList.add('paused');
-            }
-        }
-
-        document.querySelector('.player')!.classList.add('paused');
-        document.querySelector('.ground')!.classList.add('paused');
+        document.querySelectorAll('.game-object').forEach((element) => {
+            element.classList.add('paused');
+        });
         clearInterval(this.groundInterval);
 
         setTimeout(() => {
