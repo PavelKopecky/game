@@ -1,6 +1,6 @@
 html, body {
     margin: 0; height: 100%; overflow: hidden;
-    font-family: "Comic Sans MS", serif;
+    font-family: Handjet, serif;
     user-select: none;
 }
 body, ul, li, h1, h2, a {
@@ -150,7 +150,7 @@ body {
     100%{top: 498px; left: 180px}
 }
 .player-jump {
-    animation: player-jump 0.5s linear;
+    animation: player-jump 0.485s linear;
 }
 @keyframes player-jump {
     0%{top: 498px;}
@@ -246,8 +246,8 @@ body {
 }
 .score {
     position: relative;
-    padding-top: 40px;
-    font-size: 110px;
+    padding-top: 28px;
+    font-size: 130px;
     color: #F5F5F5FF;
 }
 .score-appear {

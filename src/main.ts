@@ -96,7 +96,8 @@ class game {
     startGame = () => {
         let begin = document.querySelector('.begin');
         let beginBtn = document.querySelector('.begin-btn');
-        document.querySelector('.player-start')!.classList.add('fly-dude');
+        let playerStart = document.querySelector('.player-start');
+        if (playerStart) playerStart.classList.add('fly-dude');
         clearInterval(startJump);
 
         const hs = Number(localStorage.getItem('highscore')!);
@@ -360,11 +361,8 @@ const startJump = setInterval(() => {
     const startImg = document.querySelector('.player-start')! as HTMLElement;
     document.querySelector('.player-start')!.classList.add('player-start-jump');
     startImg.style.rotate = `${90*rotateCount}deg`;
-    jumpEffect.play();
     rotateCount += Math.floor(Math.random() * 10) % 5 - 2
     setTimeout(() => {
-        jumpEffect.currentTime = 0;
-        jumpEffect.pause();
         document.querySelector('.player-start')!.classList.remove('player-start-jump');
         if (startTrigger) currentGame.startGame();
     }, 1000);

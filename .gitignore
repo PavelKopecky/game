@@ -1,3 +1,4 @@
 *.js
 .idea
 *.piko
+.DS_STORE
