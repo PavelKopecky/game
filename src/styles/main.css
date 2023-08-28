@@ -19,32 +19,52 @@ body {
     text-align: center;
 }
 .begin {
-    position:absolute;
+    text-align: center;
 }
 .begin-btn {
-    position:absolute;
+    position: relative;
+    width: 196px;
+    z-index: 2;
+    border: none;
+    background: none;
+    top: 240px;
+    left: -57px;
+}
+.button-start {
+    z-index: 2;
+    width: 150%;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 .background-start {
     position:absolute;
-    top: -650px;
+    top: -570px;
     left: -200px;
-}
-.begin-btn {
-    border: none;
 }
 .player-start {
     position: absolute;
     z-index: 2;
-    top: 625px;
-    left: 200px;
+    top: 630px;
+    left: 225px;
     transition: rotate 1s;
+    width: 108px;
 }
 .player-start.img {
     z-index: 2;
-    width: 100%;
+    width: 150%;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 .player-start-jump {
-    animation: player-start-jump 1s linear infinite;
+    animation: player-start-jump 1s linear;
 }
 @keyframes player-start-jump {
     0%{top: 628px;}
@@ -69,19 +89,57 @@ body {
     95%{top: 601px;}
     100%{top: 628px;}
 }
+.ob1-start {
+    position: absolute;
+    max-width: 100%;
+    width: 108px;
+    left: 1200px;
+    top: 615px;
+    z-index: 2;
+}
+.ob-shadow {
+    position: absolute;
+    width: 326px;
+    left: 980px;
+    top: 720px;
+    z-index: 1;
+}
+.ob2-start {
+    position: absolute;
+    max-width: 100%;
+    width: 144px;
+    left: 980px;
+    top: 585px;
+    z-index: 3;
+}
+.ob3-start {
+    position: absolute;
+    max-width: 100%;
+    width: 192px;
+    left: 1080px;
+    top: 555px;
+    z-index: 4;
+}
+.ob3-shadow {
+    position: absolute;
+    width: 192px;
+    left: 1080px;
+    top: 735px;
+    z-index: 1;
+}
 .fly-dude {
     animation: fly-dude 1s linear;
 }
 @keyframes fly-dude {
-    0%{top: 628px; left: 205px;}
-    10%{top: 478px; left: 210px;}
-    20%{top: 350px; left: 215px;}
-    30%{top: 242px; left: 220px;}
-    40%{top: 150px; left: 225px;}
-    50%{top: 71px; left: 230px;}
-    60%{top: 5px; left: 235px;}
-    70%{top: -50px; left: 240px; }
-    100%{top: -175px; left: 245px;}
+    0%{top: 628px; left: 225px;}
+    10%{top: 478px; left: 230px;}
+    20%{top: 350px; left: 235px;}
+    30%{top: 242px; left: 240px;}
+    40%{top: 150px; left: 245px;}
+    50%{top: 71px; left: 250px;}
+    60%{top: 5px; left: 255px;}
+    70%{top: -50px; left: 260px; }
+    100%{top: -175px; left: 265px;}
 }
 .ground {
     margin: 267px 0 0;

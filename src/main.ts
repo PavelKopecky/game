@@ -353,6 +353,8 @@ noice.volume = 0.6;
 
 let startTrigger = false;
 document.querySelector('.begin-btn')!.addEventListener('click', () => {
+    let beginBtn = document.querySelector('.button-start')! as HTMLImageElement;
+    beginBtn.src = '/src/img/button-start-1-1-pressed.png';
     startTrigger = true;
 });
 let rotateCount = 0;
