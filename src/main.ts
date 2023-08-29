@@ -269,6 +269,11 @@ class game {
             //end screen
             let e = document.createElement('div');
             e.classList.add('end-screen');
+            //background
+            let img = document.createElement('img');
+            img.classList.add('end-background');
+            img.src = '/src/img/ground-end-1.png';
+            e.appendChild(img);
             //text you lost
             let l = document.createElement('p');
             l.classList.add('lost-text');
