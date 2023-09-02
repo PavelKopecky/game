@@ -28,6 +28,7 @@ export class Game {
     highScore: number = 0;
     jmpCount: number = 0;
     groundInterval: number = 0;
+    container: HTMLElement = document.getElementById('game')!;
 
     startGame() {
         let begin = document.querySelector('.begin');
@@ -55,7 +56,7 @@ export class Game {
         const s = document.createElement('p');
         s.classList.add('score', 'game-object');
         s.innerHTML = '0';
-        document.body.appendChild(s);
+        this.container.appendChild(s);
         this.addSky();
         const e = document.createElement('div');
         e.classList.add('ground', 'game-object');
@@ -68,7 +69,7 @@ export class Game {
         img2.style.left = '2560';
         e.appendChild(img1);
         e.appendChild(img2);
-        document.body.appendChild(e);
+        this.container.appendChild(e);
 
         setTimeout(() => {
             document.querySelector('.score')!.classList.add('score-appear');
@@ -86,7 +87,7 @@ export class Game {
         skyimg2.src = 'img/sky1-1.jpg';
         sky.appendChild(skyimg1);
         sky.appendChild(skyimg2);
-        document.querySelector('.body')!.appendChild(sky);
+        this.container.appendChild(sky);
     }
 
     addPlayer() {
@@ -96,7 +97,7 @@ export class Game {
         img.src = 'img/player1.png'
         e.classList.add('player', 'game-object');
         e.appendChild(img);
-        document.body.appendChild(e);
+        this.container.appendChild(e);
         setTimeout(() => {
             document.querySelector('.player')!.classList.add('player-move');
             setTimeout(() => {
@@ -141,7 +142,7 @@ export class Game {
             }
         }
 
-        x.render();
+        x.render(this.container);
         this.obstacles.push(x);
 
         setTimeout(() => {
@@ -278,7 +279,7 @@ export class Game {
 
             e.appendChild(r);
 
-            document.body.appendChild(e);
+            this.container.appendChild(e);
             document.querySelector('.repeat-btn')!.addEventListener('click', () => {
                 if (resetPressed) {
                     buttonClick.pause();

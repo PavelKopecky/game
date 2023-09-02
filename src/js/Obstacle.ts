@@ -11,13 +11,13 @@ export abstract class Obstacle {
         this.element.classList.add('obstacle');
     }
 
-    render() {
+    render(container: HTMLElement) {
         const img = document.createElement('img');
         this.element.classList.add(this.className);
         img.src = this.imageSrc;
         this.element.appendChild(img);
         this.element.style.animation = '1.9s linear obstacle-move';
-        document.body.appendChild(this.element);
+        container.appendChild(this.element);
     }
 
     destroy() {

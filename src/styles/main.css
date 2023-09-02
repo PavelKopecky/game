@@ -3,6 +3,13 @@ html, body {
     font-family: Handjet, serif;
     user-select: none;
 }
+#game {
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    width: 1440px;
+    height: 900px;
+}
 body, ul, li, h1, h2, a {
     margin: 0;
     padding: 0;
