@@ -2,14 +2,14 @@ import {Game} from "./Game.js";
 
 let currentGame = new Game();
 
-let buttonClick = new Audio('/src/effects/button-press.mp3');
+let buttonClick = new Audio('effects/button-press.mp3');
 buttonClick.volume = 0.7;
 
 let startTrigger = false;
 document.querySelector('.begin-btn')!.addEventListener('click', () => {
     buttonClick.play();
     let beginBtn = document.querySelector('.button-start')! as HTMLImageElement;
-    beginBtn.src = '/src/img/button-start-1-1-pressed.png';
+    beginBtn.src = 'img/button-start-1-1-pressed.png';
     startTrigger = true;
 });
 let rotateCount = 0;

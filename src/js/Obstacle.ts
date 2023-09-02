@@ -1,26 +1,26 @@
 export abstract class Obstacle {
     x: number = 1800;
-    e: HTMLDivElement;
+    element: HTMLDivElement;
     abstract className: string;
-    abstract src: string;
+    abstract imageSrc: string;
     abstract size: number;
 
     constructor() {
-        this.e = document.createElement('div');
-        this.e.classList.add('game-object');
-        this.e.classList.add('obstacle');
+        this.element = document.createElement('div');
+        this.element.classList.add('game-object');
+        this.element.classList.add('obstacle');
     }
 
     render() {
         const img = document.createElement('img');
-        this.e.classList.add(this.className);
-        img.src = this.src;
-        this.e.appendChild(img);
-        this.e.style.animation = '1.9s linear obstacle-move';
-        document.body.appendChild(this.e);
+        this.element.classList.add(this.className);
+        img.src = this.imageSrc;
+        this.element.appendChild(img);
+        this.element.style.animation = '1.9s linear obstacle-move';
+        document.body.appendChild(this.element);
     }
 
-    destroy () {
-        this.e.remove();
+    destroy() {
+        this.element.remove();
     }
 }
