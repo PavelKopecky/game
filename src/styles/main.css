@@ -127,10 +127,10 @@ body {
     top: 735px;
     z-index: 1;
 }
-.fly-dude {
-    animation: fly-dude 1s linear;
+.fly-start {
+    animation: fly-start 1s linear;
 }
-@keyframes fly-dude {
+@keyframes fly-start {
     0%{top: 628px; left: 225px;}
     10%{top: 478px; left: 230px;}
     20%{top: 350px; left: 235px;}
@@ -276,9 +276,9 @@ body {
     left:0;
     background: none;
     text-align: center;
-    color: #110701;
-    padding-top: 300px;
-    font-size: 60px;
+    color: #b9b9b9;
+    padding-top: 75px;
+    font-size: 90px;
 }
 .paused {
     animation-play-state: paused;
@@ -288,26 +288,23 @@ body {
 }
 .end-background {
     position: absolute;
-    max-width: 100%;
     left:0;
     z-index: -1;
-    top: -730px;
+    top: 0;
+}
+@keyframes end-fall {
+    0% { top: 0px; }
+    100% { top: -2400px; }
 }
 .end-btn {
-    color: #757575;
-    background-color: #110701;
-    font-size: 30px;
-    border-radius: 5px;
-    padding: 5px 30px;
-    margin: 10px;
+    background: none;
     top: 480px;
-    width: 200px;
-    height: 50px;
     border: none;
-    font-family: "Comic Sans MS", serif;
+    cursor: pointer;
+    margin: 30px;
 }
-.lost-text {
-    top: 300px;
+.end-btn.img {
+    margin: 20px;
 }
 .score {
     position: relative;
@@ -320,6 +317,6 @@ body {
     transition: 1s ease-in 0.2s;
 }
 .fin-score {
-    font-size: 30px;
+    font-size: 50px;
     margin-top: -10px;
 }
