@@ -2,3 +2,5 @@
 .idea
 *.piko
 .DS_STORE
+public/
+build/
