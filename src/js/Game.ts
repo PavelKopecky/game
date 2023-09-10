@@ -2,37 +2,34 @@ import {Obstacle} from "./Obstacle.js";
 import {Obstacle1} from "./Obstacle1.js";
 import {Obstacle2} from "./Obstacle2.js";
 import {Obstacle3} from "./Obstacle3.js";
+import {Player} from "./Player.js";
 
 let theme = new Audio('effects/main-theme-2.mp3');
 theme.volume = 0.2;
 let score10 = new Audio('effects/score10-1.mp3');
 score10.volume = 0.1;
-let scream = new Audio('effects/wilhelmscream.mp3');
-scream.volume = 0.1;
 let endTheme = new Audio('effects/marche-funebre.mp3');
 endTheme.volume = 0.25;
-let jumpEffect = new Audio('effects/jump1.mp3');
-jumpEffect.volume = 0.1;
 let buttonClick = new Audio('effects/button-press.mp3');
 buttonClick.volume = 0.7;
 
 export class Game {
     difficulty: number = 1;
     obstacles: Obstacle[] = [];
-    jumpHeight: number = 500;
     state: "ready" | "running" | "over" = "ready";
-    playerUp: boolean = false;
     score: number = 0;
     frequency: number = 1500;
     difficulties = [[1, 1, 1, 1, 2], [1, 1, 2, 2, 2], [1, 2, 2, 2, 3], [1, 2, 2, 3, 3], [2, 2, 3, 3, 3], [2, 3, 3, 3, 3]];
     highScore: number = 0;
-    jmpCount: number = 0;
     groundInterval: number = 0;
     container: HTMLElement = document.getElementById('game')!;
+    player: Player = new Player();
 
     startGame() {
         let begin = document.querySelector('.begin');
         let beginBtn = document.querySelector('.begin-btn');
+
+        //todo
         let playerStart = document.querySelector('.player-start');
         if (playerStart) playerStart.classList.add('fly-start');
 
@@ -44,11 +41,17 @@ export class Game {
                 begin!.remove();
                 this.createGround();
                 if (beginBtn) beginBtn.remove();
-                setTimeout(() => this.addPlayer(), 1000);
+                this.player.render(this.container);
+                setTimeout(() => {
+                    this.startMovement();
+                }, 1050);
             }, 1000);
         } else {
             this.createGround();
-            setTimeout(() => this.addPlayer(), 1000);
+            this.player.render(this.container)
+            setTimeout(() => {
+                this.startMovement();
+            }, 1050);
         }
     }
 
@@ -88,28 +91,6 @@ export class Game {
         sky.appendChild(skyimg1);
         sky.appendChild(skyimg2);
         this.container.appendChild(sky);
-    }
-
-    addPlayer() {
-        const e = document.createElement('div');
-        const img = document.createElement('img');
-        img.classList.add('player-img');
-        img.src = 'img/player1.png'
-        e.classList.add('player', 'game-object');
-        e.appendChild(img);
-        this.container.appendChild(e);
-        setTimeout(() => {
-            document.querySelector('.player')!.classList.add('player-move');
-            setTimeout(() => {
-                document.querySelector('.player')!.classList.add('player-moved');
-                document.querySelector('.player')!.classList.remove('player-move');
-                document.addEventListener('click', () => this.playerJump());
-                document.addEventListener('keydown', (event) => {
-                    if (event.key === ' ') this.playerJump();
-                });
-                this.startMovement();
-            }, 1000);
-        }, 50);
     }
 
     startMovement() {
@@ -173,11 +154,10 @@ export class Game {
 
     interval() {
         this.state = "running";
-
         const gameInt = setInterval(() => {
             this.obstacles.forEach((obstacle) => {
                 obstacle.x -= 10;
-                if (obstacle.x <= 180 + obstacle.size / 2 + 18 && obstacle.x >= 180 - obstacle.size / 2 - 18 && !this.playerUp) {
+                if (obstacle.x <= 180 + obstacle.size / 2 + 18 && obstacle.x >= 180 - obstacle.size / 2 - 18 && !this.player.isUp) {
                     clearInterval(gameInt);
                     this.gameLost();
                 } else if (obstacle.x === 100) {
@@ -193,35 +173,12 @@ export class Game {
         }, 10);
     }
 
-    playerJump() {
-        if (this.state !== "running") return;
-        const player = document.querySelector('.player');
-        if (player!.classList.contains('player-jump')) return;
-        else {
-            const playerImg = document.querySelector('.player-img') as HTMLElement;
-            playerImg.style.rotate = `${(++this.jmpCount * 90)}deg`;
-            player!.classList.add('player-jump');
-            jumpEffect.play();
-            setTimeout(() => {
-                this.playerUp = true;
-            }, 70);
-            setTimeout(() => {
-                this.playerUp = false;
-            }, 430);
-            setTimeout(() => {
-                if (this.state === "running") document.querySelector('.player')!.classList.remove('player-jump');
-                jumpEffect.currentTime = 0;
-                jumpEffect.pause();
-            }, this.jumpHeight);
-        }
-    }
-
     gameLost() {
         this.state = "over";
         this.difficulty = 1;
         theme.pause();
         theme.currentTime = 0;
-        scream.play();
+        this.player.die();
 
         if (this.score > this.highScore) {
             this.highScore = this.score;
@@ -231,6 +188,7 @@ export class Game {
         document.querySelectorAll('.game-object').forEach((element) => {
             element.classList.add('paused');
         });
+
         this.obstacles.forEach((obstacle) => {
             obstacle.element.style.animationPlayState = 'paused';
         })
@@ -290,6 +248,7 @@ export class Game {
                 img.src = 'img/button-retry-pressed.png';
                 this.restartGame();
             });
+
             let resetPressed = false;
             document.querySelector('.reset-btn')!.addEventListener('click', () => {
                 if (!resetPressed) {
@@ -318,11 +277,9 @@ export class Game {
         endTheme.currentTime = 0;
         this.difficulty = 1;
         this.obstacles = [];
-        this.jumpHeight = 500;
         this.state = "ready";
-        this.playerUp = false;
         this.score = 0;
-        this.jmpCount = 0;
+        this.player.reset();
         this.startGame();
     }
 }
