@@ -6,6 +6,7 @@
   },
   "scripts": {
     "build": "tsc && cp -r src public && mv build public/build",
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "clean": "rm -r public/ 2>/dev/null"
   }
 }
