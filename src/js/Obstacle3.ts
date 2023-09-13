@@ -4,7 +4,7 @@ const obstacleType = new Image();
 obstacleType.src = 'img/obstacle3-1.png';
 
 export class Obstacle3 extends Obstacle {
-    size = 128;
+    size = 96;
     imageSrc = obstacleType.src;
     className = 'obstacle-type3';
 }

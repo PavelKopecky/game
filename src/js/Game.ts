@@ -4,6 +4,9 @@ import {Obstacle2} from "./Obstacle2.js";
 import {Obstacle3} from "./Obstacle3.js";
 import {Player} from "./Player.js";
 
+// @ts-ignore
+import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/+esm'
+
 let theme = new Audio('effects/main-theme-2.mp3');
 theme.volume = 0.2;
 let score10 = new Audio('effects/score10-1.mp3');
@@ -19,7 +22,7 @@ export class Game {
     state: "ready" | "running" | "over" = "ready";
     score: number = 0;
     frequency: number = 1500;
-    difficulties = [[1, 1, 1, 1, 2], [1, 1, 2, 2, 2], [1, 2, 2, 2, 3], [1, 2, 2, 3, 3], [2, 2, 3, 3, 3], [2, 3, 3, 3, 3]];
+    difficulties = [[2,2,2,2,2], [1, 1, 2, 2, 2], [1, 2, 2, 2, 3], [1, 2, 2, 3, 3], [2, 2, 3, 3, 3], [2, 3, 3, 3, 3]];
     highScore: number = 0;
     groundInterval: number = 0;
     container: HTMLElement = document.getElementById('game')!;
@@ -153,8 +156,11 @@ export class Game {
         this.state = "running";
         const gameClock = setInterval(() => {
             this.obstacles.forEach((obstacle) => {
-                obstacle.x -= 10;
-                if (obstacle.x <= 180 + obstacle.size / 2 + 18 && obstacle.x >= 180 - obstacle.size / 2 - 18 && !this.player.isUp) {
+                let player = document.querySelector('.player')! as HTMLElement;
+                console.log(parseInt(obstacle.element.style.left), parseInt(player.style.left));
+                obstacle.x -= 5;
+                if (Math.abs(parseInt(obstacle.element.style.left) - parseInt(player.style.left)) <= obstacle.size / 2 + 36
+                        && !this.player.isUp) {
                     clearInterval(gameClock);
                     this.gameLost();
                 } else if (obstacle.x === 100) {
@@ -167,7 +173,7 @@ export class Game {
                     }
                 }
             });
-        }, 10);
+        }, 5);
     }
 
     gameLost() {
@@ -186,9 +192,8 @@ export class Game {
             element.classList.add('paused');
         });
 
-        this.obstacles.forEach((obstacle) => {
-            obstacle.element.style.animationPlayState = 'paused';
-        })
+        gsap.killTweensOf('.obstacle');
+
         clearInterval(this.groundInterval);
 
         setTimeout(() => {

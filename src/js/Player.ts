@@ -51,10 +51,12 @@ export class Player {
         e.appendChild(img);
         container.appendChild(e);
         setTimeout(() => {
-            document.querySelector('.player')!.classList.add('player-move');
+            let plr = document.querySelector('.player')! as HTMLElement;
+            plr.classList.add('player-move');
             setTimeout(() => {
-                document.querySelector('.player')!.classList.add('player-moved');
-                document.querySelector('.player')!.classList.remove('player-move');
+                plr.classList.remove('player-move');
+                plr.style.left = '180px';
+                plr.style.top = '498px';
                 document.addEventListener('click', () => this.jump());
                 document.addEventListener('keydown', (event) => {
                     if (event.key === ' ') this.jump();

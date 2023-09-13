@@ -214,10 +214,6 @@ body {
     90%{top: 490px; left: 162px}
     100%{top: 498px; left: 180px}
 }
-.player-moved {
-    top: 498px;
-    left: 180px;
-}
 .obstacle {
     width: 0;
     height: 0;

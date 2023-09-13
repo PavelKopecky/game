@@ -1,3 +1,6 @@
+// @ts-ignore
+import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/+esm'
+
 export abstract class Obstacle {
     x: number = 1800;
     element: HTMLDivElement;
@@ -16,7 +19,7 @@ export abstract class Obstacle {
         this.element.classList.add(this.className);
         img.src = this.imageSrc;
         this.element.appendChild(img);
-        this.element.style.animation = '1.9s linear obstacle-move';
+        gsap.fromTo(this.element, {left: 1800}, {left: -100, duration: 1.9, ease: "power0.in"});
         container.appendChild(this.element);
     }
 
