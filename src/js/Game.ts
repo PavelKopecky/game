@@ -157,7 +157,6 @@ export class Game {
         const gameClock = setInterval(() => {
             this.obstacles.forEach((obstacle) => {
                 let player = document.querySelector('.player')! as HTMLElement;
-                console.log(parseInt(obstacle.element.style.left), parseInt(player.style.left));
                 obstacle.x -= 5;
                 if (Math.abs(parseInt(obstacle.element.style.left) - parseInt(player.style.left)) <= obstacle.size / 2 + 36
                         && !this.player.isUp) {
