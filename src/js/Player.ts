@@ -1,3 +1,6 @@
+// @ts-ignore
+import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/+esm'
+
 let jumpEffect = new Audio('effects/jump1.mp3');
 jumpEffect.volume = 0.1;
 let scream = new Audio('effects/wilhelmscream.mp3');
@@ -13,9 +16,11 @@ export class Player {
     jump() {
         if (!this.isRunning || this.isJumping) return;
         else {
-            const playerImg = document.querySelector('.player-img') as HTMLElement;
-            playerImg.style.rotate = `${(++this.jumpCount * 90)}deg`;
-            document.querySelector('.player')!.classList.add('player-jump');
+            gsap.to(".player", {ease: "power1.out", top: 355, duration: 0.24});
+            gsap.to(".player-img", {ease: "power1.out", duration: 0.4, rotate: ++this.jumpCount * 90});
+            setTimeout(() => {
+                this.isRunning && gsap.to(".player", {ease: "power1.in", top: 498, duration: 0.24});
+            }, 240);
             this.isJumping = true;
             jumpEffect.play();
             setTimeout(() => {
@@ -25,12 +30,16 @@ export class Player {
                 this.isUp = false;
             }, 430);
             setTimeout(() => {
-                if (this.isRunning) document.querySelector('.player')!.classList.remove('player-jump');
                 this.isJumping = false;
                 jumpEffect.currentTime = 0;
                 jumpEffect.pause();
             }, this.jumpDuration);
         }
+    }
+
+    fly() {
+        let playerStart = document.querySelector('.player-start')!;
+        playerStart.classList.add('fly-start');
     }
 
     render(container: HTMLElement) {
@@ -56,7 +65,9 @@ export class Player {
     }
 
     die() {
-        this.isRunning = false
+        this.isRunning = false;
+        gsap.killTweensOf('.player');
+        gsap.killTweensOf('.player-img');
         scream.play();
     }
 

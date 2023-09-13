@@ -29,14 +29,11 @@ export class Game {
         let begin = document.querySelector('.begin');
         let beginBtn = document.querySelector('.begin-btn');
 
-        //todo
-        let playerStart = document.querySelector('.player-start');
-        if (playerStart) playerStart.classList.add('fly-start');
-
         const hs = Number(localStorage.getItem('highscore')!);
         if (hs) this.highScore = hs;
 
         if (begin) {
+            this.player.fly();
             setTimeout(() => {
                 begin!.remove();
                 this.createGround();
@@ -154,11 +151,11 @@ export class Game {
 
     interval() {
         this.state = "running";
-        const gameInt = setInterval(() => {
+        const gameClock = setInterval(() => {
             this.obstacles.forEach((obstacle) => {
                 obstacle.x -= 10;
                 if (obstacle.x <= 180 + obstacle.size / 2 + 18 && obstacle.x >= 180 - obstacle.size / 2 - 18 && !this.player.isUp) {
-                    clearInterval(gameInt);
+                    clearInterval(gameClock);
                     this.gameLost();
                 } else if (obstacle.x === 100) {
                     document.querySelector('.score')!.innerHTML = String(++this.score);

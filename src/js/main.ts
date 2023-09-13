@@ -12,13 +12,13 @@ document.querySelector('.begin-btn')!.addEventListener('click', () => {
     beginBtn.src = 'img/button-start-1-1-pressed.png';
     startTrigger = true;
 });
-let rotateCount = 0;
 
+let rotateCount = 0;
 const startJump = setInterval(() => {
     const startImg = document.querySelector('.player-start')! as HTMLElement;
     document.querySelector('.player-start')!.classList.add('player-start-jump');
     startImg.style.rotate = `${90*rotateCount}deg`;
-    rotateCount += Math.floor(Math.random() * 10) % 5 - 2
+    rotateCount += Math.floor(Math.random() * 10) % 5 - 2;
     setTimeout(() => {
         document.querySelector('.player-start')!.classList.remove('player-start-jump');
         if (startTrigger) {
