@@ -22,7 +22,7 @@ export class Game {
     state: "ready" | "running" | "over" = "ready";
     score: number = 0;
     frequency: number = 1500;
-    difficulties = [[2,2,2,2,2], [1, 1, 2, 2, 2], [1, 2, 2, 2, 3], [1, 2, 2, 3, 3], [2, 2, 3, 3, 3], [2, 3, 3, 3, 3]];
+    difficulties = [[1,1,1,1,2], [1, 1, 2, 2, 2], [1, 2, 2, 2, 3], [1, 2, 2, 3, 3], [2, 2, 3, 3, 3], [2, 3, 3, 3, 3]];
     highScore: number = 0;
     groundInterval: number = 0;
     container: HTMLElement = document.getElementById('game')!;
