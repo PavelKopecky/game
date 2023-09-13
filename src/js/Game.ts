@@ -172,7 +172,7 @@ export class Game {
                     }
                 }
             });
-        }, 5);
+        }, 10);
     }
 
     gameLost() {

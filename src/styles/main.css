@@ -225,19 +225,19 @@ body {
     top: 498px;
 }
 .obstacle-type1.img {
-    width: 100%;
+    width: 72px;
 }
 .obstacle-type2 {
-    top: 474px
+    top: 474px;
 }
 .obstacle-type2.img {
-    width: 100%;
+    width: 96px;
 }
 .obstacle-type3 {
-    top: 442px
+    top: 442px;
 }
 .obstacle-type3.img {
-    width: 100%;
+    width: 128px;
 }
 .obstacle-move {
     animation: 1.9s linear obstacle-move;

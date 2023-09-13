@@ -19,7 +19,8 @@ export abstract class Obstacle {
         this.element.classList.add(this.className);
         img.src = this.imageSrc;
         this.element.appendChild(img);
-        gsap.fromTo(this.element, {left: 1800}, {left: -100, duration: 1.9, ease: "power0.in"});
+        gsap.fromTo(this.element, {left: 1800}, {rotation: 0.01, left: -100, duration: 1.9, ease: "power0.in"});
+        this.element.classList.add('obstacle-move');
         container.appendChild(this.element);
     }
 
